@@ -94,6 +94,18 @@ END
 
 两张表都准备100万的数据.
 
+```
+# 跑数据时候有个奇怪的问题
+Error: Lost connection to MySQL server during query
+错误之后,存储过程依然继续,直到数据到达100万.这里的错误修改了几处地方
+# show variables like '%timeout%';
+# show variables like 'max_allowed_packet'
+# set global wait_timeout=60000;
+# set global max_allowed_packet = 2*1024*1024
+
+注:其中修改wait_timeout时,需要修改的是interactive_timeout字段,wait_timeout展示的也是interactive_timeout字段的值
+```
+
 **创建索引**
 
 名称,字段,索引类型,索引方法
@@ -112,5 +124,9 @@ Spatial - 空间索引\(5.7.5以后的版本支持\)
 
 Btree , Hash
 
+**完成一个功能**
 
+用户登录,写一个存储过程
+
+1.判断用户名和密码是否匹配
 
