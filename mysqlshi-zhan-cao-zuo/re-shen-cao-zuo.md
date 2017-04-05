@@ -80,17 +80,37 @@ show ENGINES; # 查看数据库支持的引擎
 
 ```
 BEGIN
-	SET @num=1;
-	WHILE @num<20 DO
-	    if t=1 then
-		insert into user_sys (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
-	    else
-		insert into user_sys2 (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
-	    end if;
-	    set @num=@num+1;
-	END WHILE;
+    SET @num=1;
+    WHILE @num<20 DO
+        if t=1 then
+        insert into user_sys (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
+        else
+        insert into user_sys2 (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
+        end if;
+        set @num=@num+1;
+    END WHILE;
 END
 ```
 
 两张表都准备100万的数据.
+
+**创建索引**
+
+名称,字段,索引类型,索引方法
+
+索引类型
+
+Normal - 默认的普通索引
+
+Unique - 唯一索引
+
+FullText - 一般不用,用其他第三方工具
+
+Spatial - 空间索引\(5.7.5以后的版本支持\)
+
+索引方法
+
+Btree , Hash
+
+
 
