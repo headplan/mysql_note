@@ -185,8 +185,13 @@ END
 如果日志中还需要用户名,可以添加一个冗余字段,减少关联查询,也算是一种优化.
 
 ```
-
+# 这样的关联查询,比直接查冗余字段稍慢
+select a.user_name,a.id,b.log_date from user_sys a,user_log b 
+where a.id=b.user_id order by b.id desc limit 0,10
+select * from user_log order by id desc limit 0,10
 ```
+
+
 
 
 
