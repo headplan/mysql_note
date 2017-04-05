@@ -67,5 +67,18 @@ InnoDB和MyISAM,暂时知道两点
 
 2.事务性表应该使用InnoDB.频繁读取,如select操作很频繁的应该使用MyISAM引擎
 
+**查看该库所有表的基本状态,包括引擎**
 
+```
+show table status from 数据库名
+show ENGINES; # 查看数据库支持的引擎
+```
+
+新建两张表,一个是InnoDB一个是MyISAM.
+
+然后写一个存储过程,插入一些数据
+
+```
+
+```
 
