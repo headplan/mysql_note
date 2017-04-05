@@ -12,7 +12,7 @@ MySQL Cluster CGE - 集群收费版
 
 **下载地址**
 
-https://www.mysql.com/downloads/
+[https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
 
 选择Yum Repository
 
@@ -20,9 +20,13 @@ https://www.mysql.com/downloads/
 
 **安装文档**
 
-https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/
+[https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/)
 
-**跳过密码**
+**密码修改与设置**
 
-在配置文件中添加:skip-grant-tables
+在配置文件中添加`skip-grant-tables`跳过密码验证
+
+
+
+
 
