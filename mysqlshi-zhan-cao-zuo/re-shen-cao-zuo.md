@@ -155,7 +155,7 @@ BEGIN
     set @gid=0;
     set @user_name='';
     set @_result='login success';
-    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass;
+    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass limit 1;
     if @gid=0 then
     set @_result='login error';
     end if;
@@ -173,16 +173,20 @@ BEGIN
     set @gid=0;
     set @user_name='';
     set @_result='login success';
-    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass;
+    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass limit 1;
     if @gid=0 then
-	set @_result='login error';
+    set @_result='login error';
     end if;
-    insert into user_log(user_id,log_type) values(@gid,@_result);
+    insert into user_log(user_id,user_name,log_type) values(@gid,@user_name,@_result);
     select * from (select @_result as _result) a,(select @gid,@user_name) b;
 END
 ```
 
+如果日志中还需要用户名,可以添加一个冗余字段,减少关联查询,也算是一种优化.
 
+```
+
+```
 
 
 
