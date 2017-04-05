@@ -1,5 +1,7 @@
 # 基本概念
 
+> 操作版本:5.7
+
 **版本概念**
 
 MySQL Community Server - 社区版,开源免费
@@ -25,6 +27,34 @@ MySQL Cluster CGE - 集群收费版
 **密码修改与设置**
 
 在配置文件中添加`skip-grant-tables`跳过密码验证
+
+新版本的用户密码字段变为:authentication\_string
+
+> 老版本的user表中的password字段代表了用户的密码
+
+**修改密码方式**
+
+```
+update mysql.user set
+authentication_string=PASSWORD('123456')
+where user='root';
+# 刷新权限
+flush privileges;
+```
+
+**设置远程连接权限**
+
+```
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+# 如果报错,说明使用了上面不正规的密码修改方式,使用下面的方式重新修改密码,然后再设置远程连接权限
+ALTER USER USER() INDENTIFIED BY '123456';
+```
+
+**这里使用到了一个函数user\(\),查看当前的用户**
+
+```
+SELECT user();
+```
 
 
 
