@@ -46,6 +46,7 @@ flush privileges;
 
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
 # 如果报错,说明使用了上面不正规的密码修改方式,使用下面的方式重新修改密码,然后再设置远程连接权限
 ALTER USER USER() INDENTIFIED BY '123456';
 ```
@@ -56,7 +57,15 @@ ALTER USER USER() INDENTIFIED BY '123456';
 SELECT user();
 ```
 
+使用工具新建数据库.
 
+**数据库引擎**
+
+InnoDB和MyISAM,暂时知道两点
+
+1.前者支持外键和事务,后者不支持
+
+2.事务性表应该使用InnoDB.频繁读取,如select操作很频繁的应该使用MyISAM引擎
 
 
 
