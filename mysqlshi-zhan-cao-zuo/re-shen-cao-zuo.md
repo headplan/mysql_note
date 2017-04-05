@@ -128,5 +128,47 @@ Btree , Hash
 
 用户登录,写一个存储过程
 
-1.判断用户名和密码是否匹配
+1.判断用户名和密码是否匹配,如果匹配则返回该行数据,如果不匹配,则返回一个错误.
+
+2.不管成功不成功都记录一次日志
+
+**MySQL的变量**
+
+会话变量\(还有全局变量\)
+
+```
+set @num=1;
+select @num;
+#==========
+set @gid=0;
+set @user_name='';
+select id,user_name into @gid,@user_name from user_sys where user_name='user666';
+select @gid,@user_name;
+```
+
+写一个存储过程
+
+```
+BEGIN
+    set @gid=0;
+    set @user_name='';
+    set @_result='login success';
+    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass;
+    if @gid=0 then
+	set @_result='login error';
+    end if;
+    select * from (select @_result as _result) a,(select @gid,@user_name) b;
+END
+call sp_user_login('user666','123');
+```
+
+规范返回结果
+
+不管是否匹配成功,都返回一行数据,该行的第一个字段表示了执行结果集的状态.
+
+
+
+
+
+
 
