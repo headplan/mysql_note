@@ -79,8 +79,18 @@ show ENGINES; # 查看数据库支持的引擎
 然后写一个存储过程,插入一些数据
 
 ```
-
+BEGIN
+	SET @num=1;
+	WHILE @num<20 DO
+	    if t=1 then
+		insert into user_sys (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
+	    else
+		insert into user_sys2 (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
+	    end if;
+	    set @num=@num+1;
+	END WHILE;
+END
 ```
 
-
+两张表都准备100万的数据.
 
