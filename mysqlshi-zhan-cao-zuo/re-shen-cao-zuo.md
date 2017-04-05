@@ -191,7 +191,17 @@ where a.id=b.user_id order by b.id desc limit 0,10
 select * from user_log order by id desc limit 0,10
 ```
 
+**创建一个存储过程,存入500万登录日志**
 
+```
+BEGIN
+    SET @num=1;
+    WHILE @num<=5000000 DO
+	INSERT INTO user_log(log_type,user_id,user_name) VALUES('login success',FLOOR(RAND()*1000000),CONCAT('user',FLOOR(RAND()*1000000)));
+	set @num=@num+1;
+    END WHILE;
+END
+```
 
 
 
