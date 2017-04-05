@@ -74,11 +74,13 @@ show table status from 数据库名
 show ENGINES; # 查看数据库支持的引擎
 ```
 
-新建两张表,一个是InnoDB一个是MyISAM.
+新建两张表,一个是InnoDB一个是MyISAM.\(小技巧,导数据时,用MyISAM,然后再改成InnoDB\)
 
 然后写一个存储过程,插入一些数据
 
 ```
 
 ```
+
+
 
