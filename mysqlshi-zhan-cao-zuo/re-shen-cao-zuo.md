@@ -146,7 +146,27 @@ select id,user_name into @gid,@user_name from user_sys where user_name='user666'
 select @gid,@user_name;
 ```
 
-写一个存储过程
+**写一个存储过程规范返回结果**
+
+不管是否匹配成功,都返回一行数据,该行的第一个字段表示了执行结果集的状态.
+
+```
+BEGIN
+    set @gid=0;
+    set @user_name='';
+    set @_result='login success';
+    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass;
+    if @gid=0 then
+    set @_result='login error';
+    end if;
+    select * from (select @_result as _result) a,(select @gid,@user_name) b;
+END
+call sp_user_login('user666','123');
+```
+
+**不管成功不成功,都记录一次日志**
+
+更新刚才的存储过程
 
 ```
 BEGIN
@@ -157,16 +177,10 @@ BEGIN
     if @gid=0 then
 	set @_result='login error';
     end if;
+    insert into user_log(user_id,log_type) values(@gid,@_result);
     select * from (select @_result as _result) a,(select @gid,@user_name) b;
 END
-call sp_user_login('user666','123');
 ```
-
-规范返回结果
-
-不管是否匹配成功,都返回一行数据,该行的第一个字段表示了执行结果集的状态.
-
-
 
 
 
