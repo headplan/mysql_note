@@ -1,2 +1,6 @@
-# mysql_note
-mysql_note
+# mysql\_note
+
+MySQL笔记
+
+
+
