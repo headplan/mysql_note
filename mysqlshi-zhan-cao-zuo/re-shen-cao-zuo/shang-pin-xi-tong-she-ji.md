@@ -2,7 +2,6 @@
 
 #### 通用的商品表
 
-
     # 商品主表(即时更新)
     # ID,商品名称,商品分类,商品简介,入库时间,最后修改时间
     CREATE TABLE `prod_main` (
@@ -41,6 +40,19 @@
       `prod_pclassid` int(11) NOT NULL DEFAULT '0' COMMENT '父分类ID',
       PRIMARY KEY (`prod_classid`)
     ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+    # 点击量日志表
+    # 商品的周点击和月点击(这里简化到月)是不能记录在商品主表中的,同时还需要有个日志表,用户没登录,只记录IP,userid=0
+    CREATE TABLE `prod_clicklog` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `prod_id` int(11) NOT NULL COMMENT '商品ID',
+      `user_ip` varchar(15) NOT NULL COMMENT '用户IP',
+      `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+      `click_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '点击时间',
+      PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+    # 存储过程模拟
 
 
 
