@@ -20,6 +20,7 @@ explain select * from user_sys2 where user_name='user1'; # user_name是唯一索
 # range:索引或主键在某个范围内时
 explain select * from user_sys2 where id>0 limit 0,20;不用order by也可以
 explain select * from user_sys2 where id>0 order by id limit 0,20; # 有where条件时,并且条件是索引的条件,就会升级为range
+# 如果这里order by不是主键,也会降级
 # index:仅仅只有索引被扫描
 explain select * from user_sys2 order by id limit 0,20; # 根绝索引取出一段数据就是index
 # 一般排序的字段,为索引.
