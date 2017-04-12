@@ -14,6 +14,11 @@ explain select * from user_sys2 limit 0,20;
 # system > const > eq_ref > ref > fulltext > ref_or_null 
 > index_merge > unique_subquery > index_subquery > range > index > ALL
 # ALL是全表扫描,至少也要range.
+# const:根据主键或唯一索引只取出确定的一行数据,最快的一种.
+# range:索引或主键在某个范围内时
+# index:仅仅只有索引被扫描
+select * from user_sys2 limit 0,20;
+
 ```
 
 
