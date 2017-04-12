@@ -18,9 +18,10 @@ explain select * from user_sys2 limit 0,20;
 explain select * from user_sys2 where id=1555;
 explain select * from user_sys2 where user_name='user1'; # user_name是唯一索引
 # range:索引或主键在某个范围内时
-
+explain select * from user_sys2 where id>0 limit 0,20;不用order by也可以
+explain select * from user_sys2 where id>0 order by id limit 0,20; # 有where条件时,并且条件是索引的条件,就会升级为range
 # index:仅仅只有索引被扫描
-xplain select * from user_sys2 order by id limit 0,20; # 根绝索引取出一段数据就是index
+explain select * from user_sys2 order by id limit 0,20; # 根绝索引取出一段数据就是index
 # ALL是最慢的
 explain select * from user_sys2
 explain select * from user_sys2 limit 0,20000 # 不管取出多少条也是全表扫描
