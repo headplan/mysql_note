@@ -25,7 +25,7 @@ explain select * from user_sys2 order by id limit 0,20; # 根绝索引取出一�
 # ALL是最慢的
 explain select * from user_sys2
 explain select * from user_sys2 limit 0,20000 # 不管取出多少条也是全表扫描
-select * from user_sys2 limit 0,20;
+explain select * from user_sys2 order by user_pass limit 0,20000 # order by不是索引一样也是ALL
 ```
 
 
