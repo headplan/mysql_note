@@ -53,6 +53,22 @@
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
     # 存储过程模拟
+    1.从商品主表根据ID读取商品所有信息
+    2.如果读取到,则记录点击量日志
+    函数:
+    FOUND_ROWS():select时返回最近一条sql的结果集条数
+    ROW_COUNT():update delete insert 受影响的条数
+    sp_load_clicklog
+    BEGIN
+        set @num=0;
+        select * from prod_main where prod_id=_prod_id limit 1;
+        set @num=FOUND_ROWS();
+        if @num=1 then # 代表商品取出成功
+    	insert into prod_clicklog(prod_id,user_ip,user_id) values(_prod_id,_user_ip,_user_id);
+        end if;
+    END
+
+    # 
 
 
 
