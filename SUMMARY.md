@@ -6,4 +6,6 @@
   * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
     * [商品系统设计](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo/shang-pin-xi-tong-she-ji.md)
   * [大数据表查询优化](mysqlshi-zhan-cao-zuo/da-shu-ju-biao-cha-xun-you-hua.md)
+* MySQL相关
+  * [浅谈MySQL中utf8和utf8mb4的区别](qian-tan-mysql-zhong-utf8-he-utf8mb4-de-qu-bie.md)
 
