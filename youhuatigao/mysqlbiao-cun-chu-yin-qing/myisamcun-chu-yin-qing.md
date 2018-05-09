@@ -58,7 +58,7 @@
 
 **CHAR**
 
-一个定长字符串 , 当存储时 , 总是是用空格填满右边到指定的长度 . M的范围是1 ～ 255个字符 . 当值被检索时 , 空格尾部被删除 . CHAR值根据缺省字符集以大小写不区分的方式排序和比较 , 除非给出BINARY关键词 . NATIONAL CHAR\(短形式NCHAR\)是ANSI SQL的方式来定义CHAR列应该使用缺省字符集 . 这是MySQL的缺省 . CHAR是CHARACTER的一个缩写 . 
+一个定长字符串 , 当存储时 , 总是是用空格填满右边到指定的长度 . M的范围是1 ～ 255个字符 . 当值被检索时 , 空格尾部被删除 . CHAR值根据缺省字符集以大小写不区分的方式排序和比较 , 除非给出BINARY关键词 . NATIONAL CHAR\(短形式NCHAR\)是ANSI SQL的方式来定义CHAR列应该使用缺省字符集 . 这是MySQL的缺省 . CHAR是CHARACTER的一个缩写 .
 
 **VARCHAR**
 
@@ -68,13 +68,29 @@
 
 **TINYTEXT**
 
-一个BLOB或TEXT列 , 最大长度为255\(2^8-1\)个字符 . 
+一个BLOB或TEXT列 , 最大长度为255\(2^8-1\)个字符 .
 
 **BLOB**
 
 **TEXT**
 
-一个BLOB或TEXT列 , 最大长度为65535\(2^16-1\)个字符 . 
+一个BLOB或TEXT列 , 最大长度为65535\(2^16-1\)个字符 .
+
+**MEDIUMBLOB**
+
+**MEDIUMTEXT**
+
+一个BLOB或TEXT列 , 最大长度为16777215\(2^24-1\)个字符 . 
+
+**LONGBLOB**
+
+**LONGTEXT**
+
+一个BLOB或TEXT列 , 最大长度为4294967295\(2^32-1\)个字符 . 
+
+**ENUM\('value1','value2',...\)**
+
+枚举 . 一个仅有一个值的字符串对象 , 这个值式选自与值列表'value1'、'value2', ...,或NULL . 一个ENUM最多能有65535不同的值 . 
 
 
 
