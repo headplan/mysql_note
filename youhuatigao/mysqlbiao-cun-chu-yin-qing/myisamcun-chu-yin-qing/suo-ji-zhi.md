@@ -28,17 +28,17 @@ MySQL这3种锁的特性可大致归纳如下 :
 
 #### MYISAM存储引擎的锁机制
 
-MyISAM存储引擎只支持表锁 . 
+MyISAM存储引擎只支持表锁 .
 
 **查询表级锁争用情况**
 
-可以通过检查`table_locks_waited`和`table_locks_immediate`状态变量来分析系统上的表锁定争夺 : 
+可以通过检查`table_locks_waited`和`table_locks_immediate`状态变量来分析系统上的表锁定争夺 :
 
 show status like 'table%' 查询锁的争用情况
 
-Table\_locks\_waited的值如果比较高 , 说明存在着较严重的表级锁争用情况 . 怎么才算高?
+Table\_locks\_waited的值如果比较高 , 说明存在着较严重的表级锁争用情况 . 怎么才算高? 常用的算法是 : 
+
+`table_locks_immediate/table_locks_waited < 5000`说明有比较验证的表锁的争夺情况 , 这时候可能就需要变更查询结构 , 存储引擎 , 或者增加机器等 . 
 
 ![](/assets/biaosuochaxun.png)
-
-
 
