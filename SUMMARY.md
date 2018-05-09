@@ -2,7 +2,8 @@
 
 * [Introduction](README.md)
 * [基础应用](ji-ben-ying-yong.md)
-* [架构优化](jia-gou-you-hua.md)
+* [架构优化](youhuatigao.md)
+  * [MySQL体系结构](youhuatigao/mysqlti-xi-jie-gou.md)
 * [实战操作](mysqlshi-zhan-cao-zuo.md)
   * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
     * [商品系统设计](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo/shang-pin-xi-tong-she-ji.md)
