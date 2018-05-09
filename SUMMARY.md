@@ -6,6 +6,7 @@
   * [MySQL体系结构](youhuatigao/mysqlti-xi-jie-gou.md)
   * [MySQL表存储引擎](youhuatigao/mysqlbiao-cun-chu-yin-qing.md)
     * [MyISAM存储引擎](youhuatigao/mysqlbiao-cun-chu-yin-qing/myisamcun-chu-yin-qing.md)
+      * [MyISAM锁机制](youhuatigao/mysqlbiao-cun-chu-yin-qing/myisamcun-chu-yin-qing/suo-ji-zhi.md)
     * [InnoDB存储引擎](youhuatigao/mysqlbiao-cun-chu-yin-qing/innodbcun-chu-yin-qing.md)
 * [实战操作](mysqlshi-zhan-cao-zuo.md)
   * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
