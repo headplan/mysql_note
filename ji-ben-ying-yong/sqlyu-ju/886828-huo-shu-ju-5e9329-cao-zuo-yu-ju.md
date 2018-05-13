@@ -57,7 +57,7 @@ CREATE TABLE orders (
 
 #### 更新表
 
-1.更新表结构信息可以使用ALTER TABLE子句 , 如为表增加一列 : `ALTER TABLE vendors ADD vend_name CHAR(20);` , 另外经常用于定义外键 , 如 : 
+1.更新表结构信息可以使用ALTER TABLE子句 , 如为表增加一列 : `ALTER TABLE vendors ADD vend_name CHAR(20);` , 另外经常用于定义外键 , 如 :
 
 ```
 ALTER TABLE test_table
@@ -76,7 +76,7 @@ FOREIGN KEY(test_id) REFERENCES orders (order_id)
 ;
 ```
 
-2.重命名表 , 使用RENAME子句 . `RENAME TABLE backup_customers TO customers,backup_vendors TO vendors;`更改多个表名 , 之间用逗号间隔 . 
+2.重命名表 , 使用RENAME子句 . `RENAME TABLE backup_customers TO customers,backup_vendors TO vendors;`更改多个表名 , 之间用逗号间隔 .
 
 ```
 ALTER TABLE test_table
