@@ -16,7 +16,7 @@
 
 1.新建数据库：`CREATE DATABASE customers;`
 
-2.创建表可以使用CREATE TABLE语句 : 
+2.创建表可以使用CREATE TABLE语句 :
 
 ```SQL
 CREATE TABLE test_table (
@@ -27,7 +27,7 @@ CREATE TABLE test_table (
 ) ENGINE=INNODB;
 ```
 
-注意细节 : 
+注意细节 :
 
 * 允许NULL值 , 则说明在插入行数据时允许不给出该列的值 , 而NOT NULL则表示在插入或者更新该列数据 , 必须明确给出该列的值;
 * DEFAULT表示该列的默认值 , 在插入行数据时 , 若没有给出该列的值就会使用其指定的默认值;
@@ -50,7 +50,51 @@ CREATE TABLE orders (
 ) ENGINE=INNODB;
 ```
 
+#### 删除表（或数据库）
 
+* 删除数据库：`DROP DATABASE customers;`
+* 删除表 , 使用DROP TABLE子句：`DROP TABLE customers;`
+
+#### 更新表
+
+1.更新表结构信息可以使用ALTER TABLE子句 , 如为表增加一列 : `ALTER TABLE vendors ADD vend_name CHAR(20);` , 另外经常用于定义外键 , 如 : 
+
+```
+ALTER TABLE test_table
+ADD test_message VARCHAR(50) NOT NULL, # 添加字段
+ADD test_sex TINYINT(1) NULL DEFAULT 0,
+ADD test_test VARCHAR(255) NULL DEFAULT NULL,
+CHANGE test_age test_age_change INT, # 修改字段名,需添加类型
+MODIFY test_name VARCHAR(50), # 修改字段类型
+;
+ALTER TABLE test_table
+DROP test_test # 删除字段
+;
+ALTER TABLE test_table
+ADD CONSTRAINT test_orders # 添加外键
+FOREIGN KEY(test_id) REFERENCES orders (order_id)
+;
+```
+
+2.重命名表 , 使用RENAME子句 . `RENAME TABLE backup_customers TO customers,backup_vendors TO vendors;`更改多个表名 , 之间用逗号间隔 . 
+
+```
+ALTER TABLE test_table
+ADD test_message VARCHAR(50) NOT NULL,
+ADD test_sex TINYINT(1) NULL DEFAULT 0,
+ADD test_test VARCHAR(255) NULL DEFAULT NULL,
+CHANGE test_age test_age_change INT,
+MODIFY test_name VARCHAR(50),
+;
+ALTER TABLE test_table
+DROP test_test
+;
+ALTER TABLE test_table
+ADD CONSTRAINT test_orders
+FOREIGN KEY(test_id) REFERENCES orders (order_id)
+;
+RENAME TABLE user_sys TO user_sys_one,user_sys2 TO user_sys_two;
+```
 
 
 
