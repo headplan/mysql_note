@@ -10,9 +10,9 @@
 
 4.返回结果
 
-而整个周期中执行和返回结果算是重中之重了 , 执行阶段会有很多操作 , 包括锁等待 , 资源不足是io瓶颈等等 , 先来看看执行阶段 . 
+而整个周期中执行和返回结果算是重中之重了 , 执行阶段会有很多操作 , 包括锁等待 , 资源不足是io瓶颈等等 , 先来看看执行阶段 .
 
-执行 , 就是SQL语句的执行逻辑 , 看一下下面SQL的执行逻辑 : 
+执行 , 就是SQL语句的执行逻辑 , 看一下下面SQL的执行逻辑 :
 
 ```
 select u.name i.expression 
@@ -26,7 +26,7 @@ select u.name i.expression
 
 1.FROM子句 - 对其后面的左表user和右表执userinfo行笛卡尔积 , 产生虚拟表VT1
 
-2.ON子句 - 对VT1中的数据根据ON的条件进行过滤 , 产生虚拟表VT2 . 
+2.ON子句 - 对VT1中的数据根据ON的条件进行过滤 , 产生虚拟表VT2 .
 
 3.JOIN子句 - 将未符合条件的保留表中的数据添加到VT2中 , 剩下的形成VT3
 
@@ -45,6 +45,22 @@ select u.name i.expression
 10.ORDER BY - 对VT9的结果排序后 , 形成VT10
 
 11.LIMIT - 从VT10中取出指定的数据 , 形成VT11 , 返回给用户
+
+#### SQL语句优化
+
+**explain**
+
+显示了mysql如何使用索引来处理select语句以及连接表 . 可以帮助选择更好的索引和写出更优化的查询语句 . 
+
+```
+EXPLAIN SELECT s.uid,s.username,s.name,f.email,f.mobile,f.phone,f.postalcode,f.address
+FROM uchome_space AS s,uchome_spacefield AS f
+WHERE 1 
+AND s.groupid=0
+AND s.uid=f.uid
+```
+
+![](/assets/explain.png)
 
 
 
