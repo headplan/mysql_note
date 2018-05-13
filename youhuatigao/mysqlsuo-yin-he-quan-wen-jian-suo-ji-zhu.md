@@ -105,21 +105,23 @@ myisam引擎和innodb引擎都是使用的b+树\(b-树的变形\) , 但他们在
 
 #### 全文检索
 
-全文检索只能在char , varchar 或 text等类型上建立 fulltext . 
+全文检索只能在char , varchar 或 text等类型上建立 fulltext .
 
 ```
 SELECT title FROM user where  MATCH(title, body) AGAINST ('who is WenZhang') ;
 ```
 
-MATCH , 是要在那些字段上匹配数据 . 
+MATCH , 是要在那些字段上匹配数据 .
 
-AGAINST , 匹配的内容是 . 
+AGAINST , 匹配的内容是 .
 
-上面的语句会在 title 上和 body 字段上查找相对应的数据 . 
+上面的语句会在 title 上和 body 字段上查找相对应的数据 .
 
-全文检索里 , 也有分词的概念 . 对应的数据是一个个的词 , 词由字母 , 数字和下划线和单引号组成 , 当我们的查询内容who is WenZhang 的时候 , mysql会帮我们分词 , 分成who / is / WenZhang , 这时候mysql会在title和body中查找包含这个三个词的数据 . 
+全文检索里 , 也有分词的概念 . 对应的数据是一个个的词 , 词由字母 , 数字和下划线和单引号组成 , 当我们的查询内容who is WenZhang 的时候 , mysql会帮我们分词 , 分成who / is / WenZhang , 这时候mysql会在title和body中查找包含这个三个词的数据 .
 
-但是 , who 或着 is 不是我要查的内容 , 基本上我要查的就是WenZhang , 所以mysql在这块有个方式来处理 , 就是**stopword\(不查的词\)**和**词的长度** , 对英文来说 像the 这样的词就不用查 , 所以他在stopword中 , 而你自己设置的如 yxl 这样的词 , stopword肯定是不会存在的 , 所以mysql用词的长度来限制 , 当一个词的**长度小于等于3 或大于等于84** , 会被忽略掉 , 当然长度是可以调整的\(innodb\_ft\_min\_token\_size 和 innodb\_ft\_max\_token\_size\) . 
+但是 , who 或着 is 不是我要查的内容 , 基本上我要查的就是WenZhang , 所以mysql在这块有个方式来处理 , 就是**stopword\(不查的词\)**和**词的长度** , 对英文来说 像the 这样的词就不用查 , 所以他在stopword中 , 而你自己设置的如 yxl 这样的词 , stopword肯定是不会存在的 , 所以mysql用词的长度来限制 , 当一个词的**长度小于等于3 或大于等于84** , 会被忽略掉 , 当然长度是可以调整的\(innodb\_ft\_min\_token\_size 和 innodb\_ft\_max\_token\_size\) .
+
+全文检索也是索引的一部分 , 当然也是有存储引擎来实现 , myisam 在mysql3.2.x的版本上已经支持的全文索引 , innodb引擎在5.6.4版本也支持了全文索引 . 但是对中文支持的并不好 . 用全文索引搜中文只能得到全匹配结果 . 当然有其他的代替方案 , 比如sphinx , es等 . 如果非要使用mysql的全文索引 , 可以使用mysqlcft第三方插件 , 但是只能支持myisam引擎 . 
 
 
 
