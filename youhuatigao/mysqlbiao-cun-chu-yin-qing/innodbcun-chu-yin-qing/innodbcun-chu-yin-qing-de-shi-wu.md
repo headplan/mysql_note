@@ -70,5 +70,78 @@ ACTION;
 COMMIT/ROLLBACK;
 ```
 
+---
 
+### 事务的隔离级别
+
+事务的隔离级别有四种 : 
+
+* 非提交读 read uncommitted 会带来脏读 
+* 提交读     read committed  有版本控制,但会不重复读
+* 可重复读 read \(默认\) 会幻读
+* 序列化     serializable 符合事务的四大原则,但是读的时候会加锁,一般会认为级别越过效率越低.
+
+版本控制是在执行某个sql的时候 , 通过索引找到数据集 , 产生一个快照或者说版本
+
+只有提交读和可重复读会采用mvcc机制
+
+非提交读 , 序列化会加锁 , 让数据不可变
+
+**SQL操作**
+
+```
+show variables like 'tx_isolation' 查看隔离界别设置
+select @@tx_isolation; 查看当前回话的隔离级别
+select @@global.tx_isolation 查看系统隔离界别
+
+设置隔离级别
+set session transaction isolation level xxx 设置当前回话隔离级别
+set global transaction isolation level xxx 设置系统的隔离级别
+set global tx_isolation='READ-UNCOMMITTED'; 未提交读
+set global tx_isolation='READ-COMMITTED';  
+set global tx_isolation='REPEATABLE-READ';
+set global tx_isolation='SERIALIZABLE';
+```
+
+#### **图标理解**
+
+**未提交读（READ-UNCOMMITTED）**
+
+| 操作类型 | 事务提交前其他人是否可以看到 | 其他人更新记录后是否影响这次事务结果 | 后果 |
+| :--- | :--- | :--- | :--- |
+| 插入 | 可以 | 会 | 脏读，不可重复读、幻读 |
+| 更新 | 可以 | 会 |  |
+| 删除 | 看不到记录 | 会 |  |
+
+结论 : 安全性最低，性能最快，一般不用这个级别，会导致很多问题
+
+**提交读/不可重复读（READ-COMMITTED/NOREPEATABLE READ）**
+
+| 操作类型 | 事务提交前其他人是否可以看到 | 其他人更新记录后是否影响这次事务结果 | 后果 |
+| :--- | :--- | :--- | :--- |
+| 插入 | 不可以 | 会 | 不可重复读、幻读 |
+| 更新 | 不可以 | 会 |  |
+| 删除 | 还能看到记录 | 会 |  |
+
+结论：安全性略低，性能一般，很多数据用这个级别（mysql不是）
+
+**可重复读（REPEATABLE-READ）**
+
+| 操作类型 | 事务提交前其他人是否可以看到 | 其他人更新记录后是否影响这次事务结果 | 后果 |
+| :--- | :--- | :--- | :--- |
+| 插入 | 不可以 | 不会 | 幻读（实际数据没了或改变了，但这个事务的数据未提交前不会变化） |
+| 更新 | 不可以 | 不会 |  |
+| 删除 | 还能看到记录 | 不会 |  |
+
+结论 : 安全性一般，性能较快，mysql默认这个级别
+
+**串行化（SERIALIZABLE）**
+
+| 操作类型 | 事务提交前其他人是否可以看到 | 其他人更新记录后是否影响这次事务结果 | 后果 |
+| :--- | :--- | :--- | :--- |
+| 插入 | 不可以 | 阻塞 | 安全性最高，性能最差 |
+| 更新 | 不可以 | 阻塞 |  |
+| 删除 | 还能看到记录 | 阻塞 |  |
+
+结论 : 应用于安全度很高的项目
 
