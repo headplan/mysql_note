@@ -16,6 +16,7 @@
       * [InnoDB存储引擎的事务](youhuatigao/mysqlbiao-cun-chu-yin-qing/innodbcun-chu-yin-qing/innodbcun-chu-yin-qing-de-shi-wu.md)
   * [PHP的MySQL驱动与API](youhuatigao/phpde-mysql-qu-dong-yu-api.md)
   * [MySQL索引和全文检索技术](youhuatigao/mysqlsuo-yin-he-quan-wen-jian-suo-ji-zhu.md)
+  * [SQL语句优化和性能调优](youhuatigao/sqlyu-ju-you-hua-he-xing-neng-diao-you.md)
 * [相关资料](mysqlxiang-guan.md)
   * [浅谈MySQL中utf8和utf8mb4的区别](qian-tan-mysql-zhong-utf8-he-utf8mb4-de-qu-bie.md)
 
