@@ -2,6 +2,10 @@
 
 * [Introduction](README.md)
 * [基础应用](ji-ben-ying-yong.md)
+* [实战操作](mysqlshi-zhan-cao-zuo.md)
+  * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
+    * [商品系统设计](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo/shang-pin-xi-tong-she-ji.md)
+  * [大数据表查询优化](mysqlshi-zhan-cao-zuo/da-shu-ju-biao-cha-xun-you-hua.md)
 * [架构优化](youhuatigao.md)
   * [MySQL体系结构](youhuatigao/mysqlti-xi-jie-gou.md)
   * [MySQL表存储引擎](youhuatigao/mysqlbiao-cun-chu-yin-qing.md)
@@ -11,10 +15,7 @@
     * [InnoDB存储引擎](youhuatigao/mysqlbiao-cun-chu-yin-qing/innodbcun-chu-yin-qing.md)
       * [InnoDB存储引擎的事务](youhuatigao/mysqlbiao-cun-chu-yin-qing/innodbcun-chu-yin-qing/innodbcun-chu-yin-qing-de-shi-wu.md)
   * [PHP的MySQL驱动与API](youhuatigao/phpde-mysql-qu-dong-yu-api.md)
-* [实战操作](mysqlshi-zhan-cao-zuo.md)
-  * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
-    * [商品系统设计](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo/shang-pin-xi-tong-she-ji.md)
-  * [大数据表查询优化](mysqlshi-zhan-cao-zuo/da-shu-ju-biao-cha-xun-you-hua.md)
+  * [MySQL索引和全文检索技术](youhuatigao/mysqlsuo-yin-he-quan-wen-jian-suo-ji-zhu.md)
 * [相关资料](mysqlxiang-guan.md)
   * [浅谈MySQL中utf8和utf8mb4的区别](qian-tan-mysql-zhong-utf8-he-utf8mb4-de-qu-bie.md)
 
