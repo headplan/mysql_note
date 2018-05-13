@@ -64,11 +64,11 @@ AND s.uid=f.uid
 
 SELECT识别符 . 这是SELECT查询序列号 . 这个不重要 , 查询序号即为sql语句执行的顺序 , 看下面这条sql
 
-`EXPLAIN SELECT * FROM (SELECT*FROMuchome_spaceLIMIT10) AS s`
+`EXPLAIN SELECT * FROM (SELECT * FROM uchome_space LIMIT 10) AS s`
 
-它的执行结果为
+它的执行结果为 : 
 
 ![](/assets/selectid.png)
 
-可以看到这时的id变化了
+可以看到这时的id变化了 . 
 
