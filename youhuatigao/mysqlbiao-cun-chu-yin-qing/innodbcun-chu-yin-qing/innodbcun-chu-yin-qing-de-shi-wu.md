@@ -70,11 +70,13 @@ ACTION;
 COMMIT/ROLLBACK;
 ```
 
+> 在INNODB存储引擎中** , **任何一个SQL语句 , 数据库都默认加了BEGIN和COMMIT , 也就是隐式提交 , 当然定义了BEGIN等就是显示提交
+
 ---
 
 ### 事务的隔离级别
 
-事务的隔离级别有四种 : 
+事务的隔离级别有四种 :
 
 * 非提交读 read uncommitted 会带来脏读 
 * 提交读     read committed  有版本控制,但会不重复读

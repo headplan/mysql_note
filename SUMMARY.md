@@ -10,6 +10,7 @@
       * [MyISAM索引](youhuatigao/mysqlbiao-cun-chu-yin-qing/myisamcun-chu-yin-qing/myisamsuo-yin.md)
     * [InnoDB存储引擎](youhuatigao/mysqlbiao-cun-chu-yin-qing/innodbcun-chu-yin-qing.md)
       * [InnoDB存储引擎的事务](youhuatigao/mysqlbiao-cun-chu-yin-qing/innodbcun-chu-yin-qing/innodbcun-chu-yin-qing-de-shi-wu.md)
+  * [PHP的MySQL驱动与API](youhuatigao/phpde-mysql-qu-dong-yu-api.md)
 * [实战操作](mysqlshi-zhan-cao-zuo.md)
   * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
     * [商品系统设计](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo/shang-pin-xi-tong-she-ji.md)
