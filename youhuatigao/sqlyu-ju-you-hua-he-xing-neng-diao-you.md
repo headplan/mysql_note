@@ -60,9 +60,7 @@ AND s.groupid=0
 AND s.uid=f.uid
 ```
 
-![](/assets/explain.png)
-
-**1. id**
+![](/assets/explain.png)**1. id**
 
 SELECT识别符 . 这是SELECT查询序列号 . 这个不重要 , 查询序号即为sql语句执行的顺序 , 看下面这条sql
 
@@ -70,8 +68,7 @@ SELECT识别符 . 这是SELECT查询序列号 . 这个不重要 , 查询序号�
 
 它的执行结果为
 
-![](https://img-blog.csdn.net/20131107215627187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemh1eGluZWxp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)  
-
+![](https://img-blog.csdn.net/20131107215627187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemh1eGluZWxp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 可以看到这时的id变化了
 
