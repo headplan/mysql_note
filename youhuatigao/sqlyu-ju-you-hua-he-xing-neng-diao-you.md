@@ -50,7 +50,7 @@ select u.name i.expression
 
 **explain**
 
-显示了mysql如何使用索引来处理select语句以及连接表 . 可以帮助选择更好的索引和写出更优化的查询语句 . 
+显示了mysql如何使用索引来处理select语句以及连接表 . 可以帮助选择更好的索引和写出更优化的查询语句 .
 
 ```
 EXPLAIN SELECT s.uid,s.username,s.name,f.email,f.mobile,f.phone,f.postalcode,f.address
@@ -62,7 +62,16 @@ AND s.uid=f.uid
 
 ![](/assets/explain.png)
 
+**1. id**
+
+SELECT识别符 . 这是SELECT查询序列号 . 这个不重要 , 查询序号即为sql语句执行的顺序 , 看下面这条sql
+
+`EXPLAIN SELECT * FROM (SELECT*FROMuchome_spaceLIMIT10) AS s`
+
+它的执行结果为
+
+![](https://img-blog.csdn.net/20131107215627187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemh1eGluZWxp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)  
 
 
-
+可以看到这时的id变化了
 
