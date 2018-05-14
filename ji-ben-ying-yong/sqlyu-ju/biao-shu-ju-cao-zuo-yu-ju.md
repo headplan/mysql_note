@@ -18,6 +18,27 @@
   * 如果有NULL值 , 将值NULL作为一个分组进行返回 , 如果有多行NULL值 , 它们将分为一组 .
 * 嵌套其他查询中的查询 , 称之为子查询 . 执行过程由里向外 , 里层查询结果作为外层查询的条件 : `SELECT cust_id FROM orders WHERE order_num IN (SELECT order_num FROM orderitems WHERE prod_id = 'happy')`.当然 , 多表的查询可以使用联结查询 . 
 
+**联结查询**
+
+* 内联结用又称之为内部联结 , 是基于两个表之间的的相等测试 . 如果不加过滤条件 , 会造成“**笛卡尔积**” . `SELECT vend_name,prod_name,prod_price FROM vendors INNER JOIN products ON vendors.vend_id=products.vend_id;`同样可以使用WHERE进行多表联结查询 , 但是更推荐使用INNER JOIN等联结方式 ; 
+* 外部联结包括**左外联结LEFT JOIN**和**右外联结RIGHT JOIN**和**全连接FULL JOIN** . 例如查询每个客户的订单数 : `SELECT customers.cust_id,orders.orders_num FROM customers LEFT JOIN orders ON orders.cust_id =customers.cust_id;`LEFT JOIN 会全部返回左表数据 , RIGHT JOIN会全部返回右表数据 , FULL JOIN会将左右两个表的数据全部返回;
+* 联结查询与聚集函数一起使用 . 如查询每个客户的订单数 : `SELECT customers.cust_name,customers.cust_id,COUNT(orders.order_num) AS num_ord FROM customers INNER JOIN orders ON customers.cust_id=orders.cust_id GROUP BY customers.cust_id`
+
+**组合查询**
+
+* 多个查询\(SELECT\)可以使用UNION将多个查询结果进行合并成一个结果集返回 , UNION必须包含两个及两个以上的SELECT查询 , 并且每个传必须包含相同的列、表达式或聚集函数 , 数据类型不必完全相同 , MySQL会进行隐式的类型转换 . `SELECT vend_id,prod_id,prod_price FROM products WHERE prod_price>5 UINON SELECT vend_id,prod_id,prod_price FROM products WHERE vend_id IN (1001,1002);`
+* **UNION**返回的是去重后的结果 , 如果不需要去重则可以使用**UNION ALL**;
+* 可以多组合查询使用ORDER BY进行排序 , 但是是针对的最终的结果集进行排序 , 而不是其中单个SELECT查询进行排序 , 因此对于组合查询来说**ORDER BY子句只有一个** . `SELECT vend_id,prod_id,prod_price FROM products WHERE prod_price>5 UINON SELECT vend_id,prod_id,prod_price FROM products WHERE vend_id IN (1001,1002) ORDER BY vend_id`
+
+**使用函数对数据进行处理**
+
+* 拼接列名 : `SELECT Concat (vendName,'(',vendCountry,')') FROM vendors ORDER BY vendName;`
+* 执行算术表达式计算 : `SELECT prodId, quantity,price, quantity*price AS expandedPrice FROM orderItems;`
+* 文本处理函数如**Upper\(\),LTrim\(\),RTrim\(\)**等函数 . 比如使用Upper函数将文本转换成大写 : `SELECT vendName, Upper(vendName) FROM vendors ORDER BY vendName;`
+* 时间和日期处理函数 , 如**Date\(\),Day\(\)**等 . `SELECT custId, orderNum FROM orders WHERE Date(orderDate)='2015-09-01';`
+* 数值处理函数 , 如**Abs\(\),Cos\(\)**等;
+* 常用的聚集函数 . 如**AVG\(\),COUNT\(\),MAX\(\),MIN\(\)**以及**SUM\(\)** . `SELECT COUNT(*) AS numbers, MIN(prod_price) AS price_min, MAX(prod_price) AS price_max,AVG(prod_price) AS price_avg FROM products;`
+
 #### 插入表数据
 
 #### 更新表数据
