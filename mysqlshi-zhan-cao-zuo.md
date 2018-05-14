@@ -18,13 +18,31 @@ MySQL Cluster CGE - 集群收费版
 
 [https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
 
-选择Yum Repository
+进入下面的社区版
 
-直接在下面下载rpm包即可.
+https://dev.mysql.com/downloads/
 
-**安装文档**
+**选择MySQL Community Server是编译安装**
 
-[https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/)
+* 选择对应版本下载安装 , 选择Source Code下的通用版 , 包含Boost Headers : 
+  * **Generic Linux \(Architecture Independent\), Compressed TAR Archive  
+    Includes Boost Headers**
+
+依赖工具 : CMake `yum install cmake -y`
+
+> https://cmake.org/
+
+还依赖C++的Boost类库 , 这里下载的带有
+
+选择Yum Repository是YUM安装Boost Headers , 就不用安装了 , 具体可以查看 : 
+
+> https://www.boost.org/
+
+* 选择对应版本下载安装
+
+> **安装文档**
+>
+> [https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/)
 
 **密码修改与设置**
 
