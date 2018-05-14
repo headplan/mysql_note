@@ -18,7 +18,7 @@
     * [事务处理](ji-ben-ying-yong/sqlyu-ju/shi-wu-chu-li.md)
     * [触发器](ji-ben-ying-yong/sqlyu-ju/hong-fa-qi.md)
   * [PHP API](ji-ben-ying-yong/phpde-mysql-qu-dong-yu-api.md)
-* [实战操作](mysqlshi-zhan-cao-zuo.md)
+* [实际应用](mysqlshi-zhan-cao-zuo.md)
   * [基本内容](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo.md)
     * [商品系统设计](mysqlshi-zhan-cao-zuo/re-shen-cao-zuo/shang-pin-xi-tong-she-ji.md)
   * [大数据表查询优化](mysqlshi-zhan-cao-zuo/da-shu-ju-biao-cha-xun-you-hua.md)
