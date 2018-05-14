@@ -1,6 +1,18 @@
 # MySQL配置文件
 
 ```
+服务器类标签(server)
+    [mysqld]（推荐使用）
+    [mysqld_safe]
+客户端标签
+    [client](推荐使用)
+    [mysql]
+    [mysqladmin]
+    [mysqldump]
+    [myisamchk]
+```
+
+```
 [client] 
 # 客户端
 # 包含端口
@@ -300,6 +312,39 @@ key_buffer_size = 8M
 sort_buffer_size = 8M
 read_buffer = 4M
 write_buffer = 4M
+```
+
+#### 一些根据内存修改的配置
+
+```
+#!/bin/bash
+
+sed -i "s@max_connections.*@max_connections = $((${Mem}/3))@" /etc/my.cnf
+if [ ${Mem} -gt 1500 -a ${Mem} -le 2500 ]; then
+	sed -i 's@^thread_cache_size.*@thread_cache_size = 16@' /etc/my.cnf
+	sed -i 's@^query_cache_size.*@query_cache_size = 16M@' /etc/my.cnf
+	sed -i 's@^myisam_sort_buffer_size.*@myisam_sort_buffer_size = 16M@' /etc/my.cnf
+	sed -i 's@^key_buffer_size.*@key_buffer_size = 16M@' /etc/my.cnf
+	sed -i 's@^innodb_buffer_pool_size.*@innodb_buffer_pool_size = 128M@' /etc/my.cnf
+	sed -i 's@^tmp_table_size.*@tmp_table_size = 32M@' /etc/my.cnf
+	sed -i 's@^table_open_cache.*@table_open_cache = 256@' /etc/my.cnf
+elif [ ${Mem} -gt 2500 -a ${Mem} -le 3500 ]; then
+	sed -i 's@^thread_cache_size.*@thread_cache_size = 32@' /etc/my.cnf
+	sed -i 's@^query_cache_size.*@query_cache_size = 32M@' /etc/my.cnf
+	sed -i 's@^myisam_sort_buffer_size.*@myisam_sort_buffer_size = 32M@' /etc/my.cnf
+	sed -i 's@^key_buffer_size.*@key_buffer_size = 64M@' /etc/my.cnf
+	sed -i 's@^innodb_buffer_pool_size.*@innodb_buffer_pool_size = 512M@' /etc/my.cnf
+	sed -i 's@^tmp_table_size.*@tmp_table_size = 64M@' /etc/my.cnf
+	sed -i 's@^table_open_cache.*@table_open_cache = 512@' /etc/my.cnf
+elif [ ${Mem} -gt 3500 ]; then
+	sed -i 's@^thread_cache_size.*@thread_cache_size = 64@' /etc/my.cnf
+	sed -i 's@^query_cache_size.*@query_cache_size = 64M@' /etc/my.cnf
+	sed -i 's@^myisam_sort_buffer_size.*@myisam_sort_buffer_size = 64M@' /etc/my.cnf
+	sed -i 's@^key_buffer_size.*@key_buffer_size = 256M@' /etc/my.cnf
+	sed -i 's@^innodb_buffer_pool_size.*@innodb_buffer_pool_size = 1024M@' /etc/my.cnf
+	sed -i 's@^tmp_table_size.*@tmp_table_size = 128M@' /etc/my.cnf
+	sed -i 's@^table_open_cache.*@table_open_cache = 1024@' /etc/my.cnf
+fi
 ```
 
 #### show status 命令
