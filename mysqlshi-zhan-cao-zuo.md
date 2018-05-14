@@ -29,7 +29,7 @@ MySQL Cluster CGE - 集群收费版
     Includes Boost Headers\*\*
   * `wget -c https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.22.tar.gz`
 
-依赖工具 : CMake 
+依赖工具 : CMake
 
 `yum install cmake -y`
 
@@ -39,18 +39,19 @@ MySQL Cluster CGE - 集群收费版
 
 > [https://www.boost.org/](https://www.boost.org/)
 
-其他依赖 : 也是在cmake时可能会报的错 . 
+其他依赖 : 也是在cmake时可能会报的错 .
 
 ```
 yum install git -y
 yum install gcc gcc-c++ -y
 yum install ncurses ncurses-devel -y
+yum install bison -y
 
 # 搜索准确的名称
 yum search c++
 ```
 
-> 网上找的依赖总结 : 
+> 网上找的依赖总结 :
 >
 > ```
 > 安装确保以下系统相关库文件
@@ -82,7 +83,7 @@ yum search c++
 # chown mysql.mysql -R /data/mysql
 ```
 
-编辑MySQL : 
+编辑MySQL :
 
 ```
 cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
@@ -114,7 +115,51 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
 
 > 更多参数
 >
-> http://www.linuxeye.com/Linux/MySQL-cmake-options.html
+> [http://www.linuxeye.com/Linux/MySQL-cmake-options.html](http://www.linuxeye.com/Linux/MySQL-cmake-options.html)
+
+**编译安装**
+
+    # 查看cpu是几核的
+    cat /proc/cpuinfo | grep processor | wc -l
+    # 比如是4核的
+    # make -j 4
+    # make -j `cat /proc/cpuinfo | grep processor | wc -l`
+
+    # 最后
+    make install
+
+**变更权限**
+
+```
+# chown mysql.mysql -R /usr/local/mysql
+```
+
+**配置文件**
+
+```
+# 默认配置文件会根据前面的配置,在/etc/my.cnf
+# 对其进行配置
+配置文件详解在下篇的内容记录,查看并复制.
+```
+
+**启动脚本**
+
+```
+cp 
+# 给权限
+chmod a+x /etc/init.d/mysqld
+# 开机启动
+chkconfig --level 345 mysqld on
+```
+
+**设置环境变量**
+
+```
+echo "export PATH=/usr/local/mysql/bin/:$PAHT" >> /etc/profile
+source /etc/profile
+```
+
+---
 
 **选择Yum Repository是YUM安装**
 
