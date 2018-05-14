@@ -139,15 +139,15 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
 ```
 # 默认配置文件会根据前面的配置,在/etc/my.cnf
 # 对其进行配置
-配置文件详解在下篇的内容记录,查看并复制.
+配置文件详解在后面的优化部分.
 ```
 
 **启动脚本**
 
 ```
-cp 
+cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 # 给权限
-chmod a+x /etc/init.d/mysqld
+# chmod a+x /etc/init.d/mysqld
 # 开机启动
 chkconfig --level 345 mysqld on
 ```
@@ -157,6 +157,14 @@ chkconfig --level 345 mysqld on
 ```
 echo "export PATH=/usr/local/mysql/bin/:$PAHT" >> /etc/profile
 source /etc/profile
+
+# 改错了/bin/vi /etc/profile,把错的改回来.
+```
+
+**初始化MySQL**
+
+```
+mysqld --initialize-insecure --user=mysql --basedir=${mysql_install_dir} --datadir=${mysql_data_dir}
 ```
 
 ---
