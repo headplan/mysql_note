@@ -164,7 +164,14 @@ source /etc/profile
 **初始化MySQL**
 
 ```
-mysqld --initialize-insecure --user=mysql --basedir=${mysql_install_dir} --datadir=${mysql_data_dir}
+mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql/data
+# 这里初始化使用--initialize会随机生成一个密码
+```
+
+**启动MySQL**
+
+```
+service mysqld start
 ```
 
 ---
