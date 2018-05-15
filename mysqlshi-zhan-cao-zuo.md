@@ -217,5 +217,5 @@ ALTER USER USER() INDENTIFIED BY '123456';
 SELECT user();
 ```
 
-使用工具新建数据库.
+**使用工具新建数据库.**
 
