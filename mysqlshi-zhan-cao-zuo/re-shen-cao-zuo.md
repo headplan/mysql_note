@@ -31,23 +31,25 @@ show ENGINES; # 查看数据库支持的引擎
 
 然后写一个存储过程,插入一些数据
 
-```
-BEGIN
-    SET @num=1;
-    WHILE @num<20 DO
+    CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_data_to_user_system`(IN t int, IN n int)
+    BEGIN
+      set @num=1;
+      while @num<n do
         if t=1 then
-        insert into user_sys (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
+          insert into user_system_1 (username,password) values (concat('user',@num), '123456');
         else
-        insert into user_sys2 (user_name,user_pass) VALUES (CONCAT('user',@num),'123');
+          insert into user_system_2 (username,password) values (concat('user',@num), '123456');
         end if;
         set @num=@num+1;
-    END WHILE;
-END
-```
+      end while;
+    END
 
 两张表都准备100万的数据.
 
 ```
+call insert_data_to_user_system(1,100);
+call insert_data_to_user_system(2,100);
+
 # 跑数据时候有个奇怪的问题
 Error: Lost connection to MySQL server during query
 错误之后,存储过程依然继续,直到数据到达100万.这里的错误修改了几处地方
@@ -77,7 +79,7 @@ Spatial - 空间索引\(5.7.5以后的版本支持\)
 
 Btree , Hash
 
-**完成一个功能**
+#### **完成一个功能**
 
 用户登录,写一个存储过程
 
