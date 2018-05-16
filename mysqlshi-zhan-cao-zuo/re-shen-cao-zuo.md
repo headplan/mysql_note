@@ -145,15 +145,14 @@ select * from user_log order by id desc limit 0,10
 
 **创建一个存储过程,存入500万登录日志**
 
-```
-BEGIN
-    SET @num=1;
-    WHILE @num<=5000000 DO
-    INSERT INTO user_log(log_type,user_id,user_name) VALUES('login success',FLOOR(RAND()*1000000),CONCAT('user',FLOOR(RAND()*1000000)));
-    set @num=@num+1;
-    END WHILE;
-END
-```
+    CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_data_to_user_log`()
+    BEGIN
+      SET @num=1;
+      WHILE @num<=50000 DO
+        INSERT INTO user_log(log_type,userid,username) VALUES('login success',FLOOR(RAND()*100),CONCAT('user',FLOOR(RAND()*100)));
+        SET @num=@num+1;
+      END WHILE;
+    END
 
 
 
