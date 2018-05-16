@@ -154,5 +154,9 @@ select * from user_log order by id desc limit 0,10
       END WHILE;
     END
 
+```
+call insert_data_to_user_log();
+```
+
 
 
