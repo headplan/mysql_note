@@ -49,12 +49,16 @@
 
     # 点击量日志表
     # 商品的周点击和月点击(这里简化到月)是不能记录在商品主表中的,同时还需要有个日志表,用户没登录,只记录IP,userid=0
+    # 把日期格式改为精确到日即可,当前是时分秒,后面也可以判断查询到数据则不去updata点击次数
+    # `click_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '点击时间',
+    # `click_date` data NOT NULL DEFAULT CURRENT_data COMMENT '点击时间',
     CREATE TABLE `prod_clicklog` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `prod_id` int(11) NOT NULL COMMENT '商品ID',
       `user_ip` varchar(15) NOT NULL COMMENT '用户IP',
       `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
-      `click_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '点击时间',
+      `click_date` data NOT NULL DEFAULT CURRENT_DATA COMMENT '点击日期',
+      `click_num` int(11) NOT NULL DEFAULT '1' COMMENT `默认点击次数`,
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -70,14 +74,21 @@ ROW_COUNT():update delete insert 受影响的条数
 sp_load_clicklog
 BEGIN
     set @num=0;
+    set @c=0;
     select * from prod_main where prod_id=_prod_id limit 1;
     set @num=FOUND_ROWS();
     if @num=1 then # 代表商品取出成功
-    insert into prod_clicklog(prod_id,user_ip,user_id) values(_prod_id,_user_ip,_user_id);
+      # 查看三个字段在同一日期,同一IP,同一人的条数
+      select count(*) into @c from prod_clicklog where prod_id=_prod_id and user_ip=_user_ip and user_id=_user_id
+      and click_DATA=CURRENT_DATA;
+      if @c>0 then # 代表已经点击过,只对click_num累加
+        updata prod_clicklog set click_num=click_num+1 where prod_id=_prod_id and user_ip=_user_ip and user_id=_user_id
+        and click_data=CURRENT_DATA;
+      else # 新增点击日志
+        insert into prod_clicklog(prod_id,user_ip,user_id,click_data) values(_prod_id,_user_ip,_user_id,CURRENT_DATA);
+      end if;
     end if;
 END
-
-# 
 ```
 
 
