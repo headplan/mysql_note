@@ -87,54 +87,51 @@ Btree , Hash
 
 2.不管成功不成功都记录一次日志
 
+**创建日志表**
+
+    CREATE TABLE `user_log` (
+      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `userid` int(11) NOT NULL,
+      `username` varchar(20) NOT NULL,
+      `log_type` varchar(20) NOT NULL,
+      `log_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
 **MySQL的变量**
 
-会话变量\(还有全局变量\)
+会话变量
 
 ```
+# 会话变量尝试,可以理解为一次过程,或一次查询的变量.
 set @num=1;
 select @num;
-#==========
+#==========需要初始化,不然会一直存在.
 set @gid=0;
-set @user_name='';
-select id,user_name into @gid,@user_name from user_sys where user_name='user666';
-select @gid,@user_name;
+set @username='';
+select id,username into @gid,@username from user_system_1 where username='user66';
+select @gid,@username;
 ```
 
 **写一个存储过程规范返回结果**
 
 不管是否匹配成功,都返回一行数据,该行的第一个字段表示了执行结果集的状态.
 
-```
-BEGIN
-    set @gid=0;
-    set @user_name='';
-    set @_result='login success';
-    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass limit 1;
-    if @gid=0 then
-    set @_result='login error';
-    end if;
-    select * from (select @_result as _result) a,(select @gid,@user_name) b;
-END
-call sp_user_login('user666','123');
-```
-
-**不管成功不成功,都记录一次日志**
-
-更新刚才的存储过程
+    CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_user_login`(IN _username varchar(30), IN _password varchar(30))
+    BEGIN
+      set @gid=0;
+      set @username='';
+      set @_result='login success'; 
+      select id,username into @gid,@username from user_system_1 where username=_username and password=_password limit 1;
+      if @gid=0 then
+        set @_result='login error';
+      end if;
+      insert into user_log(userid,username,log_type) values(@gid,@username,@_result);
+      select * from (select @_result as _result) a,(select @gid,@username) b;
+    END
 
 ```
-BEGIN
-    set @gid=0;
-    set @user_name='';
-    set @_result='login success';
-    select id,user_name into @gid,@user_name from user_sys where user_name=_user_name and user_pass=_user_pass limit 1;
-    if @gid=0 then
-    set @_result='login error';
-    end if;
-    insert into user_log(user_id,user_name,log_type) values(@gid,@user_name,@_result);
-    select * from (select @_result as _result) a,(select @gid,@user_name) b;
-END
+call sp_user_login('user66','123456');
 ```
 
 如果日志中还需要用户名,可以添加一个冗余字段,减少关联查询,也算是一种优化.
