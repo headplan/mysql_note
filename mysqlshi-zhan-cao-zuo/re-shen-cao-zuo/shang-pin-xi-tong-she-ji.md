@@ -35,6 +35,8 @@
       PRIMARY KEY (`prod_id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+**简单的分类**
+
     # 简单的分类表,可能还会有描述,slug等.
     CREATE TABLE `prod_class` (
       `prod_classid` int(11) NOT NULL AUTO_INCREMENT COMMENT '分类ID',
@@ -42,6 +44,8 @@
       `prod_pclassid` int(11) NOT NULL DEFAULT '0' COMMENT '父分类ID',
       PRIMARY KEY (`prod_classid`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+**点击量日志**
 
     # 点击量日志表
     # 商品的周点击和月点击(这里简化到月)是不能记录在商品主表中的,同时还需要有个日志表,用户没登录,只记录IP,userid=0
@@ -54,23 +58,27 @@
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-    # 存储过程模拟
-    1.从商品主表根据ID读取商品所有信息
-    2.如果读取到,则记录点击量日志
-    函数:
-    FOUND_ROWS():select时返回最近一条sql的结果集条数
-    ROW_COUNT():update delete insert 受影响的条数
-    sp_load_clicklog
-    BEGIN
-        set @num=0;
-        select * from prod_main where prod_id=_prod_id limit 1;
-        set @num=FOUND_ROWS();
-        if @num=1 then # 代表商品取出成功
-        insert into prod_clicklog(prod_id,user_ip,user_id) values(_prod_id,_user_ip,_user_id);
-        end if;
-    END
+**读取存储过程模拟程序**
 
-    # 
+```
+# 存储过程模拟
+1.从商品主表根据ID读取商品所有信息
+2.如果读取到,则记录点击量日志
+函数:
+FOUND_ROWS():select时返回最近一条sql的结果集条数
+ROW_COUNT():update delete insert 受影响的条数
+sp_load_clicklog
+BEGIN
+    set @num=0;
+    select * from prod_main where prod_id=_prod_id limit 1;
+    set @num=FOUND_ROWS();
+    if @num=1 then # 代表商品取出成功
+    insert into prod_clicklog(prod_id,user_ip,user_id) values(_prod_id,_user_ip,_user_id);
+    end if;
+END
+
+# 
+```
 
 
 
