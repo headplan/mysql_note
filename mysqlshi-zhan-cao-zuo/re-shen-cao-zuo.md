@@ -11,6 +11,24 @@ show ENGINES; # 查看数据库支持的引擎
 
 新建两张表,一个是InnoDB一个是MyISAM.\(小技巧,导数据时,用MyISAM,然后再改成InnoDB\)
 
+    CREATE TABLE `user_system_1` (
+      `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `username` VARCHAR(30) NOT NULL,
+      `password` VARCHAR(30) NOT NULL,
+      `register_data` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY(`id`),
+      UNIQUE KEY `index_username` (`username`) USING BTREE
+    ) ENGINE=Innodb DEFAULT CHARSET=utf8;
+
+    CREATE TABLE `user_sytsem_2` (
+      `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `username` VARCHAR(30) NOT NULL,
+      `password` VARCHAR(30) NOT NULL,
+      `register_data` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY(`id`),
+      UNIQUE KEY `index_username` (`username`) USING BTREE
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 然后写一个存储过程,插入一些数据
 
 ```

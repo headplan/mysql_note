@@ -188,7 +188,7 @@ service mysqld start
 
 在配置文件中添加`skip-grant-tables`跳过密码验证
 
-新版本的用户密码字段变为:authentication\_string
+5.7新版本的用户密码字段变为:authentication\_string
 
 > 老版本的user表中的password字段代表了用户的密码
 
