@@ -2,8 +2,10 @@
 
 #### 通用的商品表
 
+**商品主表**
+
     # 商品主表(即时更新)
-    # ID,商品名称,商品分类,商品简介,入库时间,最后修改时间
+    # ID,商品名称,商品分类,商品简介,入库时间,最后修改时间,如果需要可能会还添加作者ID,也就是类似userid
     CREATE TABLE `prod_main` (
       `prod_id` int(11) NOT NULL AUTO_INCREMENT,
       `prod_name` varchar(50) NOT NULL COMMENT '商品名称',
@@ -64,7 +66,7 @@
         select * from prod_main where prod_id=_prod_id limit 1;
         set @num=FOUND_ROWS();
         if @num=1 then # 代表商品取出成功
-    	insert into prod_clicklog(prod_id,user_ip,user_id) values(_prod_id,_user_ip,_user_id);
+        insert into prod_clicklog(prod_id,user_ip,user_id) values(_prod_id,_user_ip,_user_id);
         end if;
     END
 
