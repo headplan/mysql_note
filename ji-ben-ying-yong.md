@@ -66,5 +66,23 @@ Mysql的存储引擎是插件式的 . 它根据MySql AB公司提供的文件访�
 
 #### MySQL的各个功能模块中的执行过程
 
-![](/assets/mysqljiagoutu.png)
+![](/assets/mysqljiagoutu.png)**MySQL可以分为Server层和存储引擎层两部分**
+
+Server层包括
+
+* 连接器\(Connectors\)
+* 查询缓存\(Cache , Buffer\)
+* 分析器\(也叫解释器 , Parser\)
+* 查询优化器\(Optimizer\)
+* 执行器\(SQL接口 , SQL Interface\)
+
+以及所有的内置函数\(如日期 , 时间 , 数学和加密函数等\) , 所有跨存储引擎的功能也都在这一层实现 , 比如存储过程 , 触发器 , 视图等 . 
+
+
+
+
+
+
+
+
 
