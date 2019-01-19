@@ -66,7 +66,9 @@ Mysql的存储引擎是插件式的 . 它根据MySql AB公司提供的文件访�
 
 #### MySQL的各个功能模块中的执行过程
 
-![](/assets/mysqljiagoutu.png)**MySQL可以分为Server层和存储引擎层两部分**
+![](/assets/mysqljiagoutu.png)
+
+**MySQL可以分为Server层和存储引擎层两部分**
 
 **Server层包括**
 
