@@ -105,5 +105,7 @@ mysql -h$ip -P$port -u$user -p
 
 使用show processlist命令查看连接状态 .
 
-![](/assets/showprocesslist.png)Command中显示的Sleep就是表示一个空闲连接 . 这个时间使用wait\_timeout参数控制 , 默认8小时 , 如果太长时间没动静 , 连接器就自动断开了 . 
+![](/assets/showprocesslist.png)
+
+Command中显示的Sleep就是表示一个空闲连接 . 这个时间使用wait\_timeout参数控制 , 默认8小时 , 如果太长时间没动静 , 连接器就自动断开了 .
 
