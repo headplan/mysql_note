@@ -105,9 +105,13 @@ mysql -h$ip -P$port -u$user -p
 
 这就意味着 , 一个用户成功建立连接后 , 即使用管理员账号对这个用户的权限做了修改 , 也不会影响已经存在的连接权限 , 只有再新建的连接才会有新的权限设置 .
 
-使用show processlist命令查看连接状态 .
+使用**show processlist**命令查看连接状态 .
 
 ![](/assets/showprocesslist.png)
 
 Command中显示的Sleep就是表示一个空闲连接 . 这个时间使用wait\_timeout参数控制 , 默认8小时 , 如果太长时间没动静 , 连接器就自动断开了 .
+
+**查询缓存**
+
+
 
