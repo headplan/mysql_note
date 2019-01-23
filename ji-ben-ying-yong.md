@@ -129,5 +129,15 @@ mysql> select SQL_CACHE * from T where ID=10
 
 > MySQL8.0版本直接将查询缓存的整块功能删掉了 .
 
+**分析器**
+
+如果没有缓存 , 接下来即要真正执行SQL语句了 , 首先就是对SQL语句的解析 , 就是分析器 . 
+
+分析器会做词法分析 , 分析输入的字符串空格组成的这条SQL语句 , 到底代表什么意思 . 例如 , Select关键字被识别为查询语句 . 语法错误则会提示 : 
+
+```bash
+You have an error in your SQL syntax
+```
+
 
 
