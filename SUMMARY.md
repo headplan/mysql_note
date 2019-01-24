@@ -4,6 +4,7 @@
 * [基本概念](ji-ben-ying-yong.md)
   * [基础架构](ji-ben-ying-yong/ji-chu-jia-gou.md)
   * [日志系统](ji-ben-ying-yong/ri-zhi-xi-tong.md)
+  * [事务隔离](ji-ben-ying-yong/shi-wu-ge-li.md)
   * [存储引擎](ji-ben-ying-yong/cun-chu-yin-qing.md)
   * [数据类型](ji-ben-ying-yong/shu-ju-lei-xing.md)
   * [锁机制与事务](ji-ben-ying-yong/suo-ji-zhi-yu-shi-wu.md)
