@@ -15,7 +15,13 @@ MySQL里经常说到的WAL技术 , 全程是Write-Ahead-Logging , 它的关键�
 
 具体来说 , 当有一条记录需要更新的时候 , InnoDB引擎就会把记录写到redo log里面 , 并更新内存 , 这时候更新就算完成了 . 同时 , InnoDB引擎会在适当的时候 , 将这个操作记录更新到磁盘里 , 而这个更新往往是在系统比较空闲的时候做 .
 
-InnoDB的redo log是固定大小的 , 比如可以配置为一组4个文件 , 每个文件的大小是1GB . InnoDB就可以记录4GB的操作 , 从头开始写 , 写到末尾就又回到开头循环写 : 
+InnoDB的redo log是固定大小的 , 比如可以配置为一组4个文件 , 每个文件的大小是1GB . InnoDB就可以记录4GB的操作 , 从头开始写 , 写到末尾就又回到开头循环写 :
 
 ![](/assets/redolog.png)
+
+write pos是当前记录的位置 , 一边写一边后移 , 写到第3号文件末尾后就回到0号文件开头 . checkpoint是当前要擦除的位置 , 也是往后推移并且循环的 , 擦除记录前要把记录更新到数据文件 . 
+
+write pos和checkpoint之间的存储空间是空着的部分 , 可以用来记录新的操作 . 如果write pos追上checkpoint , 表示redo log的大小已经满了 , 这个时候就不能再执行新的更新 , 得停下来先擦掉一些记录 , 把checkpoint推进一下 . 
+
+有了redo log , InnoDB就可以保证即使数据库发生异常重启 , 之前提交的记录都不会丢失 , 这个能力称为crash-safe . 
 
