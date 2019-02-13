@@ -27,10 +27,14 @@ write pos和checkpoint之间的存储空间是空着的部分 , 可以用来记�
 
 #### binlog
 
-MySQL整体来看分为两块 : 
+MySQL整体来看分为两块 :
 
 * 引擎层负责存储相关的具体事宜 . \(比如前面Innodb引擎特有的redolog\)
 * Server层主要做的是 MySQL 功能层面的事情 . \(下面要说的binlog , 归档日志\)
+
+历史回顾 : 
+
+> 最开始MySQL里并没有InnoDB引擎 , MySQL自带的引擎是MyISAM , 但是没有crash-safe能力 , binlog只能用于归档 . 而InnoDB是另一个公司以插件形式引入MySQL的 , 使用了有crash-safe能力的日志系统 , 也就是前面提到的redo log .
 
 
 
