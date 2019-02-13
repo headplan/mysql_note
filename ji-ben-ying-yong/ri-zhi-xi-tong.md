@@ -9,7 +9,7 @@ SQL语句的更新语句的执行链路和查询的流程类似 . 也都会走�
 * redo log\(重做日志\)
 * binlog\(归档日志\)
 
-#### redo log
+#### redolog
 
 MySQL里经常说到的WAL技术 , 全程是Write-Ahead-Logging , 它的关键点就是先写日志 , 再写磁盘 , 就和饭店记账一样 , 先写到单子上 , 等不忙了的时候再写进账本里 .
 
@@ -26,6 +26,11 @@ write pos和checkpoint之间的存储空间是空着的部分 , 可以用来记�
 有了redo log , InnoDB就可以保证即使数据库发生异常重启 , 之前提交的记录都不会丢失 , 这个能力称为crash-safe .
 
 #### binlog
+
+MySQL整体来看分为两块 : 
+
+* 引擎层负责存储相关的具体事宜 . \(比如前面Innodb引擎特有的redolog\)
+* Server层主要做的是 MySQL 功能层面的事情 . \(下面要说的binlog , 归档日志\)
 
 
 
